@@ -10,6 +10,8 @@ prices = new_releases.xpath('.//div[@class="discount_final_price"]/text()')
 
 tags = []
 for tag in new_releases.xpath('.//div[@class="tab_item_top_tags"]'):
+	print(tag)
+	print(tag.text_content())
 	tags.append(tag.text_content())
 
 tags = [tag.split(', ') for tag in tags] 
