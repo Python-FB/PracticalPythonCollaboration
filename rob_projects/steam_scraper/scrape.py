@@ -39,18 +39,17 @@ for game in platform_divs:
     total_platforms.append(platforms)
     counter += 1
 
-output = {}
+output = []
 headers = ['title', 'price', 'tags', 'platforms']
 counter = 0
 for info in zip(titles, prices, tags, total_platforms):
 
-    # NOTE: I changed the output a bit to have a pure dictionary
-    # Instead of a list of json objects, I made a dictionary of json objects
     resp = {}
-    for i in range(1,4):
+    for i in range(0,4):
         resp[headers[i]] = info[i]
-    output[info[0]] = resp
+    output.append(resp)
     counter += 1
+
 
 with open('current_games.json', 'w') as game_file:
     json.dump(output, game_file)
