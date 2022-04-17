@@ -80,14 +80,14 @@
       text-align: center;
     }
   }
-  /* div.divFooter {
+  div.divFooter {
     position: fixed;
     height: 30px;
-    background-color: purple;
+    background-color: rgb(13, 0, 128);
     bottom: 0;
     width: 100%;
     left: 0;
-  } */
+  }
   
   /** RTL **/
   .rtl {
@@ -120,9 +120,9 @@
                 <img src="https://imgur.com/edx5Sb0.png" style="height: 100px;">
               </td>
               <td>
-                Invoice #: 123<br>
+                Invoice #: {{invoice_number}}<br>
                 Created: {{date}}<br>
-                Due: August 1, 2022
+                Due: {{duedate}}
               </td>
             </tr>
           </table>

@@ -20,6 +20,7 @@ app = Flask(__name__)
 def hello_world():
     today = datetime.today().strftime("%B %d, %Y")
     posted_data = request.get_json() or {}
+    # print(posted_data)
     # invoice_number = 123
     default_data = {
         'duedate': 'August 1, 2019',
@@ -46,63 +47,70 @@ def hello_world():
             'company_name': 'Acme Corp',
             'person_email': 'john@example.com',
             'person_name': 'John Dilly'
-        }
+        },
+        'from_addr' :{
+            'company_name': 'Python Tip',
+            'addr1': '12345 Sunny Road',
+            'addr2': 'Chicago, Il, USA 60606'
+        },
+        'items': [
+            {
+                'title': 'website design',
+                'charge': 300.00
+            },{
+                'title': 'Hosting (3 months)',
+                'charge': 75.00
+            },{
+                'title': 'Domain name (1 year)',
+                'charge': 10.00
+            }
+        ]
     }
-    from_addr = {
-        'company_name': 'Python Tip',
-        'addr1': '12345 Sunny Road',
-        'addr2': 'Chicago, Il, USA 60606'
-    }
-    to_addr = {
-        'company_name': 'Acme Corp',
-        'person_name': 'Rob Weddell',
-        'person_email': 'rweddell@example.com'
-    }
-    items = [
-        {
-            'title': 'website design',
-            'charge': 300.00
-        },{
-            'title': 'Hosting (3 months)',
-            'charge': 75.00
-        },{
-            'title': 'Domain name (1 year)',
-            'charge': 10.00
-        }
-    ]
-    # duedate = posted_data.get('duedate', default_data['duedate'])
-    # from_addr = posted_data.get('from_addr', default_data['from_addr'])
-    # to_addr = posted_data.get('to_addr', default_data['to_addr'])
-    # invoice_number = posted_data.get('invoice_number', default_data['invoice_number'])
-    # items = posted_data.get('items', default_data['items'])
-    # total = sum([i['charge'] for i in items])
-    # rendered = render_template('invoice.html',
-    #                         date = today,
-    #                         from_addr = from_addr,
-    #                         to_addr = to_addr,
-    #                         items = items,
-    #                         total = total,
-    #                         invoice_number = invoice_number,
-    #                         duedate = duedate)
     duedate = posted_data.get('duedate', default_data['duedate'])
     from_addr = posted_data.get('from_addr', default_data['from_addr'])
     to_addr = posted_data.get('to_addr', default_data['to_addr'])
     invoice_number = posted_data.get('invoice_number', default_data['invoice_number'])
     items = posted_data.get('items', default_data['items'])
     total = sum([i['charge'] for i in items])
+    
+    things = ['from_addr', 'to_addr', 'items', 'invoice_number', 'duedate']
+    for thing in things:
+        print(thing, '->', posted_data[thing])
+
+    print('duedate =>', duedate)
+    print('from_addr =>', from_addr)
+    print('to_addr =>', to_addr)
+    print('inv_num =>', invoice_number)
     rendered = render_template('invoice.html',
                             date = today,
-                            from_addr = posted_data.get('from_addr', default_data['from_addr']),
-                            to_addr = posted_data.get('to_addr', default_data['to_addr']),
-                            items = posted_data.get('items', default_data['items']),
-                            total = sum([i['charge'] for i in items]),
-                            invoice_number = posted_data.get('invoice_number', default_data['invoice_number']),
-                            duedate = posted_data.get('duedate', default_data['duedate']))
+                            from_addr = from_addr,
+                            to_addr = to_addr,
+                            items = items,
+                            total = total,
+                            invoice_number = invoice_number,
+                            duedate = duedate)
+    # duedate = posted_data.get('duedate', default_data['duedate'])
+    # from_addr = posted_data.get('from_addr', default_data['from_addr'])
+    # to_addr = posted_data.get('to_addr', default_data['to_addr'])
+    # invoice_number = posted_data.get('invoice_number', default_data['invoice_number'])
+    # # items = posted_data.get('items', default_data['items'])
+    # total = sum([i['charge'] for i in items])
+    # things = ['from_addr', 'to_addr', 'items', 'invoice_number', 'duedate']
+    # for thing in things:
+    #     print(thing, '->', posted_data[thing])
+    # rendered = render_template('invoice.html',
+    #                         date = today,
+    #                         from_addr = posted_data.get('from_addr', default_data['from_addr']),
+    #                         to_addr = posted_data.get('to_addr', default_data['to_addr']),
+    #                         items = posted_data.get('items', default_data['items']),
+    #                         total = sum([i['charge'] for i in items]),
+    #                         invoice_number = posted_data.get('invoice_number', default_data['invoice_number']),
+    #                         duedate = posted_data.get('duedate', default_data['duedate']))
     html = HTML(string=rendered)
-    rendered_pdf = html.write_pdf() #'invoice.pdf')
+    rendered_pdf = html.write_pdf()
     return send_file(
             io.BytesIO(rendered_pdf),
-            attachment_filename='invoice.pdf'
+            download_name='invoice.pdf'
         )
 
 

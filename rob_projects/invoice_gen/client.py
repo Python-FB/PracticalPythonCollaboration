@@ -33,8 +33,8 @@ data = {
 user_response = ''
 
 while user_response != 'no':
-    data['duedate'] = input('new : ')
-    print(data['duedate'])
+    data['duedate'] = input('new date : ')
+    print('new_due_date', data['duedate'])
     file_name = input('new file name?: ')
     user_response = input('continue?: ')
     html = requests.post(url, json=data)
