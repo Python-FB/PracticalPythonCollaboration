@@ -131,3 +131,4 @@ robsenv/
 invenv/
 *.pdf
 access.json
+tester.*

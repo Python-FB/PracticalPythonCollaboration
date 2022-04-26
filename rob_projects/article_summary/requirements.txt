@@ -1,0 +1,6 @@
+sumy 
+wand 
+newspaper3k 
+requests 
+numpy
+transformers
