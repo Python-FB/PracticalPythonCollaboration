@@ -131,6 +131,7 @@ robsenv/
 invenv/
 *.pdf
 access.json
-tester.*
-tester.ipynb
+*tester.*
+*tester.ipynb
 *.jpg
+*config.json
