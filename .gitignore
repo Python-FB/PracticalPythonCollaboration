@@ -132,3 +132,5 @@ invenv/
 *.pdf
 access.json
 tester.*
+tester.ipynb
+*.jpg
