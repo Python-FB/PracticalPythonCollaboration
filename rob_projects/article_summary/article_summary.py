@@ -13,7 +13,7 @@ from random import choice
 from transformers import pipeline
 import os
 
-
+# 2 types of summarizing: extractive and abstractive
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
@@ -84,7 +84,7 @@ else:
         (0, int(height-new_height), int(width), int(height))
     )
 
-FONT_SIZE = int(resize[0][3]/(30))
+FONT_SIZE = int(resize[0][3]/(25))
 
 with Image(blob=image_blob.content) as canvas:
     print(canvas.width)
@@ -93,7 +93,7 @@ with Image(blob=image_blob.content) as canvas:
     canvas.font = Font("SanFranciscoDisplay-Bold.otf", 
                         size=FONT_SIZE, 
                         color=Color('black'),
-                        stroke_color=Color('white'))
+                        # stroke_color=Color('white'))
     caption_width = int(canvas.width/1.2)
     margin_left = int((canvas.width-caption_width)/2)
     margin_top = int(canvas.height/2)
@@ -108,7 +108,7 @@ with Image(blob=image_blob.content) as canvas:
     canvas.font = Font("SanFranciscoDisplay-Bold.otf", 
                         size=FONT_SIZE, 
                         color=Color('black'),
-                        stroke_color=Color('white'))
+                        # stroke_color=Color('white'))
     caption_width = int(canvas.width/1.2)
     margin_left = int((canvas.width-caption_width)/2)
     margin_top = 30
