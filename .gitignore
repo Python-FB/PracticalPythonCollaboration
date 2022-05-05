@@ -137,3 +137,5 @@ access.json
 *tester.ipynb
 *.jpg
 *config.json
+*.mp4
+*.google_cookie
