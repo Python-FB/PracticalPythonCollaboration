@@ -136,6 +136,6 @@ access.json
 *tester.*
 *tester.ipynb
 *.jpg
-*config.json
+config.json
 *.mp4
 */.google_cookie
